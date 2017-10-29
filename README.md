@@ -1,0 +1,2 @@
+# sqlstudy
+study of sql
