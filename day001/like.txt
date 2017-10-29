@@ -1,0 +1,93 @@
+1.关键字；LIKE
+SELECT * FROM my_database WHERE location LIKE '%CA';
+通配符：%，它是任意数量的未知字符的替身。
+通配符：_，它是一个未知字符的替身。
+
+2.关键字：BETWEEN，使用<=和>=，但是不等于<加>。即BETWEEN是包含双端边界的范围。
+注意：顺序很重要！！
+
+3.关键字：IN，加上用括号围起来的值的集合，只要列值匹配集合中的任何值，即返回该行或者该列。
+SELECT * FROM my_table WHERE rating IN ('innovative', 'fabulous', 'delightful', 'pretty good');
+
+4.关键字：NOT IN，即列值不匹配集合中的任何值才返回该行或者该列。
+SELECT  * FROM my_table WHERE rating NOT IN ('pretty good');
+
+！！NOT 可以和BETWEEN和LIKE一起使用，重点是记得NOT一定要紧接在WHERE后面。
+eg：
+SELECT drink_name FROM drink_info WHERE NOT carbs BETWEEN 3 AND 6;
+eg:
+SELECT date_time from black_book WHERE NOT date_name LIKE '_A__B%'
+AND NOT date_name LIKE 'B%';
+当NOT和AND或OR一起使用时，则要直接接在AND或OR的后面。(NOT IN是个例外，而且把NOT移动紧接在WHERE之后
+也可以运行，因此，为了方便记忆，则统一使用所有的NOT都是紧接在WHERE之后)
+
+5.关键字：DELETE，所有符合WHERE条件的记录都会从表中被删除。
+DELETE FROM my_table WHERE activities = 'dancing';
+规则：
+DELETE不能删除单一列中的值或表中某一列的所有值；
+DELETE可用于删除一行或多行，根绝WHERE子句而定；
+WHERE后跟随的条件和SELECT语句一样，包括NOT等
+
+6.删除表中的每一行数据：
+DELETE FROM my_table;
+
+7.关键字：UPDATE，跟新某一列或者多列的值。
+UPDATE doughnut-ratings
+SET type = 'glazed'
+WHERE type = 'plain glazed';
+
+规则：
+使用UPDATE，可以改变单一列或者所有列的值。
+在SET子句中可以加入更多的column = value组，其间用逗号分隔：
+UPDATE my_table
+SET first_column = 'newvalue',
+second_column = 'another_value'
+WHERE ...;
+UPDATE可用于更新单一行或者多行，一切都交给WHERE子句决定。
+
+8.原子性数据的正式规则：
+规则一：具有原子性数据的列中不会有多个类型相同的值。
+规则二：具有原子性数据的表中不会有多个存储同类数据的列。
+
+规范化表的优点：
+1.规范化表中没有重复的数据，可以减小数据库的大小。
+2.因为查找的数据较少，你的查询会更为快速。
+
+9.1NF：第一范式，每个数据行均需包含原子性数据值，而且每个数据行均需具有唯一的识别方法。
+每个数据行必须包含具有原子性的值。
+每个数据行必须有独一无二的识别项，人称主键(Primary Key)。
+
+10.关键字：AUTO_INCREMENT，可以让SQL软件自动为该列填入数字，第一行
+填入1，后面的依序递增。
+
+11.关键字：ALTER，更新表的结构。
+ALTER TABLE my_contacts
+ADD column contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD PRIMARY KEY (contact_id);
+说明：FIRST要求软件把新列放在最前面，它是一个可选关键字，但把
+主键放在最前面是个不错的习惯。
+
+12.关键字：SHOW CREATE TABLE：使用这个命令来呈现创建现有表的正确语法
+SHOW CREATE TABLE my_table;
+
+13.AFTER：紧跟在新添加的列的名称后面。
+ALTER TABLE my_contacts
+ADD COLUMN phone VARCHAR(10)
+AFTER first_name;
+
+14.关键字：FIRST, SECOND,...,LAST, FIRST, BEFORE, AFTER
+
+15关键字：.RENAME TO：更改表的名称。
+ALTER TABLE projects
+RENAME TO project_list;
+
+16.关键字：CHANGE COLUMN: 更改列的名称。
+ALTER TABLE project_list
+CHANGE COLUMN number proj_id INT NOT NULL AUTO_INCREMENT,
+ADD PRIMARY KEY (proj_id);
+
+17.关键字：MODIFY。修改列的类型。
+ALTER TABLE proj_list
+MODIFY COLUMN proj_desc VARCHAR(120);
+
+245页
