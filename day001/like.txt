@@ -25,7 +25,7 @@ AND NOT date_name LIKE 'B%';
 DELETE FROM my_table WHERE activities = 'dancing';
 规则：
 DELETE不能删除单一列中的值或表中某一列的所有值；
-DELETE可用于删除一行或多行，根绝WHERE子句而定；
+DELETE可用于删除一行或多行，根据WHERE子句而定；
 WHERE后跟随的条件和SELECT语句一样，包括NOT等
 
 6.删除表中的每一行数据：
@@ -62,7 +62,7 @@ UPDATE可用于更新单一行或者多行，一切都交给WHERE子句决定。
 
 11.关键字：ALTER，更新表的结构。
 ALTER TABLE my_contacts
-ADD column contact_id INT NOT NULL AUTO_INCREMENT FIRST,
+ADD COLUMN contact_id INT NOT NULL AUTO_INCREMENT FIRST,
 ADD PRIMARY KEY (contact_id);
 说明：FIRST要求软件把新列放在最前面，它是一个可选关键字，但把
 主键放在最前面是个不错的习惯。
