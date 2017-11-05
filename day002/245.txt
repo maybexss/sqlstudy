@@ -7,7 +7,7 @@ ALTER TABLE project_list
 DROP COLUMN start_time;
 3.如果已经创建了主键，然后又意外的想改用另一列，那么可以：
 ALTER TABLE your_table DROP PRIMARY KEY;
-4.处理AUTO_IMCREMENT:
+4.处理AUTO_INCREMENT:
 ALTER TALBE your_table CHANGE your_id your_id INT(11) NOT NULL;
 有一点要记住：每个表中只有一列可以加上AUTO_INCREMENT，该列必须为
 证书类型并且不能包含NULL。
@@ -15,7 +15,7 @@ ALTER TALBE your_table CHANGE your_id your_id INT(11) NOT NULL;
 RIGHT(str,2):从str字符串的右侧开始选取2个字符
 LEFT(str,3):从str字符串的左侧开始选取3个字符
 SUBSTRING_INDEX(str, substr, 2):从str中找到第2个substr出现时它前面(不包括它自己)所有的字符串。
-SUBSTRING(your_string,start_position,length):能攫取一部分your_string字符串，攫取的起始位置为start_position，攫取长度有length决定。
+SUBSTRING(your_string,start_position,length):能攫取一部分your_string字符串，攫取的起始位置为start_position，攫取长度由length决定。
 UPPER(your_string)和LOWER(your_string)分别可把整组字符串改为大写或小写。
 REVERSE(your_string)：将字符串反转。
 LTRIM(your_string)和RTRIM(your_string)会返回清除多余空格后的字符串，他们分别清除字符左侧和右侧的多余空格。
@@ -31,7 +31,7 @@ CASE
   WHEN column3 = somevalue3 AND column4 = somevalue4 THEN newvalue3
   ELSE newvalue4
 END [WHERE column5 = somevalue5];
-说明：每次从第一个WHEN条件判断，如果满足条件，则设置colum的值为条件的心值，然后直接执行END,不会再次判断后面的
+说明：每次从第一个WHEN条件判断，如果满足条件，则设置column的值为条件的新值，然后直接执行END,不会再次判断后面的
 情况是否没满足条件。(ELSE可以不要，但是建议加上)
 也可以在END后面加上WHERE语句过滤。
 CASE可搭配除UPDATE意外的SELECT、DELETE和INSERT语句都可。
@@ -45,29 +45,29 @@ ORDER BY title;
 SELECT title,category,purchased
 FROM movie_table
 ORDER BY category, purchased;
-先按照第一列进行排序，然后在=再根据第二列进行排序。
+先按照第一列进行排序，然后再根据第二列进行排序。
 9.关键字：DESC：用于ORDER BY子句列名的时候，用来反转查询结果的顺序。
 SELECT title,category,purchased
 FROM movie_table
 ORDER BY category ASC, purchased DESC;
-这里的ASC为圣墟，因为系统默认为升序，故这个可以省去。
+这里的ASC为升序，因为系统默认为升序，故这个可以省去。
 10.关键字函数：SUM：将括号内给定的列值全部加总。
 SELECT SUM(sales)
 FROM cookie_sales
 WHERE first_name = 'Nicole';
-11.关键字：GROUP BY：在SUM语句中加上GROUP BY，会对结果按照要求分组。
+11.关键字：GROUP BY：按照要求分组后再操作。
 SELECT first_name, SUM(sales)
 FROM cookie_sales
 GROUP BY first_name
 ORDER BY SUM(sales) DESC;
 解释：根据first_name进行分组加总，并将结果按照降序排序。
-12.关键字函数：AVG：求取括号内的平均值‘
+12.关键字函数：AVG：求取括号内的平均值
 SELECT first_name,AVG(sales)
 FROM cookie_sales
 GROUP BY first_name
 ORDER BY AVG(sales) DESC;
 13.关键字MAX函数和MIN函数：求取括号中最大或最小的值
-SELECT fist_name, MAX(sales)
+SELECT first_name, MAX(sales)
 FROM cookie_sales
 GROUP BY first_name
 ORDER BY first_name DESC;

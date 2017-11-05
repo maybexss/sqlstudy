@@ -1,0 +1,34 @@
+1.关键字：LIMIT:精确指定要从结果集返回的记录数量
+SELECT first_name,SUM(sales)
+FROM cookie_sales
+GROUP BY first_name
+ORDER BY SUM(sales) DESC
+LIMIT 2;
+2.关键字；LIMIT 0,5 ：返回从第0个开始的5个缘故元素(sql中从0开始编号)
+SELECT * FROM my_table WHERE first_name = '_A%'
+LIMIT 3,2;
+解释：返回从第4个开始的两条记录
+3.定义：外键：表中的某一列，它引用到另一个表的主键
+4.关键字： FOREIGN KEY：外键
+5.外键使用的主键也被称为父键，主键所在的表又被称为父表
+外键能用于确认一张表中的行与另一张表中的行相对应
+外键的值可以是NULL，即使主键不可为NULL
+外键值不需唯一-----事实上，外键通常都没有唯一性。
+外键不一定必须是父表的主键，但必须具有唯一性。
+6.关键字：CONSTRAINT：约束
+CREATE TABLE interests(
+int_id INT NOT NULL AUT_INCREMENT PRIMARY KEY,
+interest VARCHAR(50) NOT NULL,
+contact_id INT NOT NULL,
+CONSTRAINT my_contacts_contact_id_fk
+FOREIGN KEY (contact_id)
+REFERENCES my_contacts(contact_id)
+);
+7。一对一：父表只有一行与子表的某行相关(一对一关系的连接线是单纯的实线，表示链接一件事物与另一件事物)
+一对多：A表的某一条记录可以对应B表中的多条记录，但是B表中的某一条记录只能对应到A表的某一条记录(连接线用带有黑色箭头来表示一对多的连接关系)
+8.junction table (连接表)
+在两个多对多的表之间需要一个中间桥梁来存储两个表的id，从而把关系简化为两个一对多。这个中间桥梁就是所谓的连接表。
+用它来存储两个相关表的主键
+9.多对多：用junction table存储原始表的主键
+
+351页
